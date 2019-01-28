@@ -9,8 +9,9 @@ button3 = document.getElementById('button-three');
 UI_text = document.getElementById("UI-text");
 UI_body = document.getElementById("UI-body");
 
-story = { "Home": "You live in a modest house with Ikea furniture and cream colored walls", "Home-view": "You have done well for yourself, but this place seems rather empty", "Window": "You are infront of a large bay window.", "Window-view": "What a lovely day it is.", "Window-meditate":"Ah and so we continue along the path of enlightenment.", "Outside": "What a lovely day. Perhaps, too nice to even go to work?" };
-storyChoice = { "Home": { "button-one": "view window.", "button-two": "view room.", "button-three": "go outside" }, "Window": { "button-one": "look out window", "button-two": "meditate", "button-three": "return to room" }, "Outside": { "button-one": "go to work.", "button-two": "go to the park.", "button-three": "return home."} };
+story = { "Home": "You live in a modest house with Ikea furniture and cream colored walls", "Home-view": "You have done well for yourself, but this place seems rather empty", "Window": "You are infront of a large bay window.", "Window-view": "What a lovely day it is.", "Window-meditate":"Ah and so we continue along the path of enlightenment.", "Outside": "What a lovely day. Perhaps, too nice to even go to work?", "Work":"Another day of hard labor, little pay, and medocrity.", "Park": "Ah the park. Sometimes you just got to get outside. I wish I could share this day with someone else." };
+storyChoice = { "Home": { "button-one": "view window.", "button-two": "view room.", "button-three": "go outside" }, "Window": { "button-one": "look out window", "button-two": "meditate", "button-three": "return to room" }, "Outside": { "button-one": "go to work.", "button-two": "go to the park.", "button-three": "return home."}, 
+"Work": { "button-one": "kill your boss.", "button-two": "drink coffee and get to work.", "button-three": "return home."}, "Park": { "button-one": "start a conversation with a stranger.", "button-two": "go to work.", "button-three": "return home."} };
 
 main();
 
@@ -56,6 +57,18 @@ function main() {
             button2.innerHTML = storyChoice["Outside"]["button-two"];
             button3.innerHTML = storyChoice["Outside"]["button-three"];
             UI_body.style.background = "green";
+            break;
+        case "Work": UI_text.innerHTML = story["Work"];
+            button1.innerHTML = storyChoice["Work"]["button-one"];
+            button2.innerHTML = storyChoice["Work"]["button-two"];
+            button3.innerHTML = storyChoice["Work"]["button-three"];
+            UI_body.style.background = "black";
+            break;
+        case "Park": UI_text.innerHTML = story["Park"];
+            button1.innerHTML = storyChoice["Park"]["button-one"];
+            button2.innerHTML = storyChoice["Park"]["button-two"];
+            button3.innerHTML = storyChoice["Park"]["button-three"];
+            UI_body.style.background = "aquamarine";
             break;
         default:
     }
