@@ -105,8 +105,12 @@ body{
 
 .UI-body {
     background: pink;
-    width: 400px;
-    height: 400px;
+    width: 100%;
+    height: 100%;
+}
+
+p {
+    color: white;
 }
 
 
