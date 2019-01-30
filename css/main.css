@@ -134,7 +134,7 @@ button {
 }
 
 button:hover {
-    animation: shake 0.5s;
+    animation: shake 5s;
     animation-iteration-count: infinite;
 }
 

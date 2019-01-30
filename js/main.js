@@ -12,6 +12,9 @@ UI_body = document.getElementById("UI-body");
 // this variable is used to keep track of the number of clicks the user needs to make to get out of jail
 let clicks = 30;
 
+// this variable is used to keep track of how much narcotics the user abuses.
+let hits = 20;
+
 // Button states. Each state has three button options. These are used to travese the story tree.
 storyChoice = { 
     "Home": { "button-one": "view window.", "button-two": "view room.", "button-three": "go outside" }, 
@@ -19,13 +22,16 @@ storyChoice = {
     "Outside": { "button-one": "go to work.", "button-two": "go to the park.", "button-three": "return home."}, 
     "Work": { "button-one": "kill your boss.", "button-two": "drink coffee and get to work.", "button-three": "return home."}, 
     "Park": { "button-one": "start a conversation with a stranger.", "button-two": "go to work.", "button-three": "return home."}, 
-    "Kill": {"button-one": "clean up the blood.", "button-two": "confess to what you've done.", "button-three": "drink coffee."},  "Busted": {"button-one": "play again?", "button-two": "go to jail", "button-three": "----"},
+    "Kill": {"button-one": "clean up the blood.", "button-two": "confess to what you've done.", "button-three": "drink coffee."},  
+    "Busted": {"button-one": "play again?", "button-two": "go to jail", "button-three": "----"},
     "Jail": {"button-one": "----", "button-two": "----", "button-three": "----"}, 
     "Conversation": {"button-one": "kill them.", "button-two": "go on date.", "button-three": "go home."},
     "Date": {"button-one": "Kill your date.", "button-two": "Go dancing.", "button-three": "Go home."},
     "Dancing": {"button-one": "Get drunk.", "button-two": "Get high.", "button-three": "Go home."},
     "Drugs": {"button-one": "Do more drugs.", "button-two": "Get drunk.", "button-three": "Go home."},
-    "Drunk": {"button-one": "''I'm okay!'', keep drinking.", "button-two": "Do some drugs.", "button-three": "Go home."}
+    "Drunk": {"button-one": "''I'm okay!'', keep drinking.", "button-two": "Do some drugs.", "button-three": "Go home."},
+    "Busted": {"button-one": "play again?", "button-two": "go to jail.", "button-three": "----"},
+    "Death": {"button-one": "play again?", "button-two": "-----", "button-three": "----"}
     };
 
 main();
@@ -49,7 +55,8 @@ function main() {
         "Date":"It is nice to spend time with someone other than myself. <br> Stranger: Yeah, it sure is. <br> I feel like I am stuck in a circle. I don't know how to get out. <br> Stranger: Life is just a recollection of a past that has yet present itself. <br> This seems like deja vu. ",
         "Dancing": "You are in a crowded nightclub with loud music",
         "Drunk": "You puke all over your date",
-        "Drugs":"You are high on drugs", 
+        "Drugs":`You are high on drugs. Hits left until overdose: ${hits} `,
+        "Death":`You're wasted. Hope you enjoyed life.`, 
         };
 
     switch (state) {
@@ -152,7 +159,6 @@ function main() {
             button1.innerHTML = storyChoice["Drugs"]["button-one"];
             button2.innerHTML = storyChoice["Drugs"]["button-two"];
             button3.innerHTML = storyChoice["Drugs"]["button-three"];
-            UI_body.style.background = "yellow";
             state = "Drugs";
             break;
         case "Dancing": UI_text.innerHTML = story["Dancing"];
@@ -160,6 +166,12 @@ function main() {
             button2.innerHTML = storyChoice["Dancing"]["button-two"];
             button3.innerHTML = storyChoice["Dancing"]["button-three"];
             UI_body.style.backgroundImage = "url('https://media.giphy.com/media/C3EAt5F9qfHPO/giphy.gif')";
+            break;
+        case "Death": UI_text.innerHTML = story["Death"];
+            button1.innerHTML = storyChoice["Death"]["button-one"];
+            button2.innerHTML = storyChoice["Death"]["button-two"];
+            button3.innerHTML = storyChoice["Death"]["button-three"];
+            UI_body.style.backgroundImage = "url('https://media.giphy.com/media/YwAgyCddum3K0/giphy.gif')";
             break;
         default:
     }
@@ -199,6 +211,16 @@ function buttonOneClick() {
                         clicks = 30;
                         state = "Home";
                     }
+            break;
+
+        case "Drugs": hits--;
+                    UI_body.style.background = `rgba(${Math.random()*100},${Math.random()*6},${Math.random()*5},0)`;
+                    if(hits < 0){
+                        hits = 20;
+                        state = "Death";
+                    }
+            break;
+        case "Death": state = "Home";
             break;
         default:
     }
