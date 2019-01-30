@@ -9,23 +9,8 @@ button3 = document.getElementById('button-three');
 UI_text = document.getElementById("UI-text");
 UI_body = document.getElementById("UI-body");
 
-// Story states. This is a JSON where the key is the story state and the value is the paragraph that is displayed in the UI.
-story = { 
-    "Home": "You live in a modest house with Ikea furniture and cream colored walls", 
-    "Home-view": "You have done well for yourself, but this place seems rather empty", 
-    "Window": "You are infront of a large bay window.", "Window-view": "What a lovely day it is.", 
-    "Window-meditate":"Ah and so we continue along the path of enlightenment.", 
-    "Outside": "What a lovely day. Perhaps, too nice to even go to work?", "Work":"Another day of hard labor, little pay, and medocrity.", 
-    "Park": "Ah the park. Sometimes you just got to get outside. I wish I could share this day with someone else.", 
-    "Kill": "Violent eh? YOU PSYCOPATH! THERE IS SO MUCH BLOOD!", 
-    "Coffee": "Buona coffee, not too bad I should get some for home.",
-    "Busted": "great. now you've done it you're so busted.", "Jail":"you're jail. You have no more options. Enjoy!", 
-    "Conversation":"Beautiful day isn't it? <br> Stranger: Almost as beautiful as you.",
-    "Date":"It is nice to spend time with someone other than myself. <br> Stranger: Yeah, it sure is. <br> I feel like I am stuck in a circle. I don't know how to get out. <br> Stranger: Life is just a recollection of a past that has yet present itself. <br> This seems like deja vu. ",
-    "Dancing": "You are in a crowded nightclub with loud music",
-    "Drunk": "You puke all over your date",
-    "Drugs":"You are high on drugs", 
-    };
+// this variable is used to keep track of the number of clicks the user needs to make to get out of jail
+let clicks = 30;
 
 // Button states. Each state has three button options. These are used to travese the story tree.
 storyChoice = { 
@@ -46,7 +31,26 @@ storyChoice = {
 main();
 
 function main() {
+    
 
+    // Story states. This is a JSON where the key is the story state and the value is the paragraph that is displayed in the UI.
+    // Needs to be in main to update the clicks in the jail state. 
+    story = { 
+        "Home": "You live in a modest house with Ikea furniture and cream colored walls", 
+        "Home-view": "You have done well for yourself, but this place seems rather empty", 
+        "Window": "You are infront of a large bay window.", "Window-view": "What a lovely day it is.", 
+        "Window-meditate":"Ah and so we continue along the path of enlightenment.", 
+        "Outside": "What a lovely day. Perhaps, too nice to even go to work?", "Work":"Another day of hard labor, little pay, and medocrity.", 
+        "Park": "Ah the park. Sometimes you just got to get outside. I wish I could share this day with someone else.", 
+        "Kill": "Violent eh? YOU PSYCOPATH! THERE IS SO MUCH BLOOD!", 
+        "Coffee": "Buona coffee, not too bad I should get some for home.",
+        "Busted": "great. now you've done it you're so busted.", "Jail":`You're in jail. You have no more options. Enjoy! clicks remaining: ${clicks}`, 
+        "Conversation":"Beautiful day isn't it? <br> Stranger: Almost as beautiful as you.",
+        "Date":"It is nice to spend time with someone other than myself. <br> Stranger: Yeah, it sure is. <br> I feel like I am stuck in a circle. I don't know how to get out. <br> Stranger: Life is just a recollection of a past that has yet present itself. <br> This seems like deja vu. ",
+        "Dancing": "You are in a crowded nightclub with loud music",
+        "Drunk": "You puke all over your date",
+        "Drugs":"You are high on drugs", 
+        };
 
     switch (state) {
         case "Home": UI_text.innerHTML = story["Home"];
@@ -185,6 +189,17 @@ function buttonOneClick() {
             break;
         case "Dancing": state = "Drunk";
             break;
+        // Jail is special because the user needs
+        // to click any of the buttons to leave
+        // we need to check the click count
+        // once the click count is reached we 
+        // reset the count and change the state.
+        case "Jail": clicks--;
+                    if(clicks < 0){
+                        clicks = 30;
+                        state = "Home";
+                    }
+            break;
         default:
     }
 
@@ -218,6 +233,12 @@ function buttonTwoClick() {
         case "Drugs": state = "Drunk";
             break;
         case "Drunk": state = "Drugs";
+            break;
+        case "Jail": clicks--;
+                    if(clicks < 0){
+                        clicks = 30;
+                        state = "Home";
+                    }
             break;
         default:
     }
@@ -254,8 +275,31 @@ function buttonThreeClick() {
             break;
         case "Drunk": state = "Home";
             break;
+        case "Jail": clicks--;
+                    if(clicks < 0){
+                        clicks = 30;
+                        state = "Home";
+                    }
+            break;
         default:
     }
 
     main();
+}
+
+function jailSimulation(){
+    clicks = 30;
+
+    while(clicks > 0){
+        
+        if(button1.clicked == true || button2.clicked == true || button3.clicked == true){
+            clicks--;
+        }
+        
+    }
+
+    state = "Home";
+
+    main();
+
 }
