@@ -110,6 +110,9 @@ body{
     background-repeat: no-repeat;
     text-align: center;
     margin-top: 10%;
+    padding: 10px 10px 10px 10px;
+    box-shadow: black 5px 5px 100px; 
+    margin: 25% 2% 0 2%;
 }
 
 p {
@@ -118,6 +121,8 @@ p {
     letter-spacing: 2px;
     font-family: 'Courier New', Courier, monospace;
     font-weight: 100;
+    padding: 10px 10px 10px 10px;
+    
 }
 
 button {
