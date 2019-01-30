@@ -141,7 +141,7 @@ function main() {
             button1.innerHTML = storyChoice["Drunk"]["button-one"];
             button2.innerHTML = storyChoice["Drunk"]["button-two"];
             button3.innerHTML = storyChoice["Drunk"]["button-three"];
-            UI_body.style.background = "tomato";
+            UI_body.style.backgroundImage = "url('https://i.gifer.com/IbdT.gif')";
             state = "Drunk";
             break;
         case "Drugs": UI_text.innerHTML = story["Drugs"];
@@ -155,7 +155,7 @@ function main() {
             button1.innerHTML = storyChoice["Dancing"]["button-one"];
             button2.innerHTML = storyChoice["Dancing"]["button-two"];
             button3.innerHTML = storyChoice["Dancing"]["button-three"];
-            UI_body.style.background = "maroon";
+            UI_body.style.backgroundImage = "url('https://media.giphy.com/media/C3EAt5F9qfHPO/giphy.gif')";
             break;
         default:
     }
