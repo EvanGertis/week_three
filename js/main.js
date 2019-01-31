@@ -15,6 +15,9 @@ let clicks = 30;
 // this variable is used to keep track of how much narcotics the user abuses.
 let hits = 20;
 
+// this variable is used to keep track of how much the user drinks.
+let drinks = 12;
+
 // Button states. Each state has three button options. These are used to travese the story tree.
 storyChoice = { 
     "Home": { "button-one": "view window.", "button-two": "view room.", "button-three": "go outside" }, 
@@ -54,7 +57,7 @@ function main() {
         "Conversation":"Beautiful day isn't it? <br> Stranger: Almost as beautiful as you.",
         "Date":"It is nice to spend time with someone other than myself. <br> Stranger: Yeah, it sure is. <br> I feel like I am stuck in a circle. I don't know how to get out. <br> Stranger: Life is just a recollection of a past that has yet present itself. <br> This seems like deja vu. ",
         "Dancing": "You are in a crowded nightclub with loud music",
-        "Drunk": "You puke all over your date",
+        "Drunk": `You puke all over your date: Alcohol tolerance: ${drinks}`,
         "Drugs":`You are high on drugs. Hits left until overdose: ${hits} `,
         "Death":`You're wasted. Hope you enjoyed life.`, 
         };
@@ -223,6 +226,13 @@ function buttonOneClick() {
         case "Death": state = "Home";
                     resetAnimation();
             break;
+        case "Drunk": drinks--;
+                    alcoholSimulation();
+                    if(drinks < 0){
+                        drinks = 12;
+                        state = "Death";
+                    }
+            break;
         default:
     }
 
@@ -241,7 +251,8 @@ function buttonTwoClick() {
             break;
         case "Park": state = "Work";
             break;
-        case "Work": state = "Coffee";
+        case "Work": resetAnimation(); 
+                    state = "Coffee";
             break;
         case "Kill": state = "Busted";
             break;
@@ -334,6 +345,19 @@ function drugSimulation(){
     }, 
     function(){ 
         $(this).css("animation",`shake ${clicks/10}s`);
+        $(this).css("animation-iteration-count", "infinite");
+    })
+    UI_body.style.background = `linear-gradient(217deg, rgba(${Math.random()*1000},${Math.random()*563},${Math.random()*723}), rgba(${Math.random()*1000},${Math.random()*563},${Math.random()*723}) 70.71%)`;
+    
+}
+
+function alcoholSimulation(){
+    $('button').hover(function(){
+        $(this).css("animation", `drunkShake ${clicks/10}s`);
+        $(this).css("animation-iteration-count", "infinite");
+    }, 
+    function(){ 
+        $(this).css("animation",`drunkShake ${clicks/10}s`);
         $(this).css("animation-iteration-count", "infinite");
     })
     UI_body.style.background = `linear-gradient(217deg, rgba(${Math.random()*1000},${Math.random()*563},${Math.random()*723}), rgba(${Math.random()*1000},${Math.random()*563},${Math.random()*723}) 70.71%)`;
