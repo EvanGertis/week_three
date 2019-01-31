@@ -214,13 +214,14 @@ function buttonOneClick() {
             break;
 
         case "Drugs": hits--;
-                    UI_body.style.background = `rgba(${Math.random()*100},${Math.random()*6},${Math.random()*5},0)`;
+                    drugSimulation();
                     if(hits < 0){
                         hits = 20;
                         state = "Death";
                     }
             break;
         case "Death": state = "Home";
+                    resetAnimation();
             break;
         default:
     }
@@ -324,4 +325,28 @@ function jailSimulation(){
 
     main();
 
+}
+
+function drugSimulation(){
+    $('button').hover(function(){
+        $(this).css("animation", `shake ${clicks/100}s`);
+        $(this).css("animation-iteration-count", "infinite");
+    }, 
+    function(){ 
+        $(this).css("animation",`shake ${clicks/10}s`);
+        $(this).css("animation-iteration-count", "infinite");
+    })
+    UI_body.style.background = `linear-gradient(217deg, rgba(${Math.random()*1000},${Math.random()*563},${Math.random()*723}), rgba(${Math.random()*1000},${Math.random()*563},${Math.random()*723}) 70.71%)`;
+    
+}
+
+function resetAnimation(){
+    $('button').hover(function(){
+        $(this).css("animation", `shake 5s`);
+        $(this).css("animation-iteration-count", "infinite");
+    }, 
+    function(){ 
+        $(this).css("animation",`shake 0s`);
+        $(this).css("animation-iteration-count", "infinite");
+    });
 }
