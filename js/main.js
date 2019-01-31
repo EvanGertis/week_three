@@ -223,10 +223,12 @@ function buttonOneClick() {
                         state = "Death";
                     }
             break;
+        // once the user has died we reset the animation for the buttons back to the original animation.
         case "Death": state = "Home";
                     resetAnimation();
             break;
         case "Drunk": drinks--;
+                    // this function makes the buttons move in big swinging motions.
                     alcoholSimulation();
                     if(drinks < 0){
                         drinks = 12;
@@ -251,6 +253,8 @@ function buttonTwoClick() {
             break;
         case "Park": state = "Work";
             break;
+        // If the user is at work the second button should cause them 
+        // to sober up. So, we reset the animation. 
         case "Work": resetAnimation(); 
                     state = "Coffee";
             break;
