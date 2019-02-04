@@ -18,6 +18,12 @@ let hits = 20;
 // this variable is used to keep track of how much the user drinks.
 let drinks = 12;
 
+// this variable is used to keep track of money made.
+let income = 0;
+
+// this variable is used to keep track of class status;
+let thresh = 1000;
+
 // Button states. Each state has three button options. These are used to travese the story tree.
 storyChoice = { 
     home: { b1: "view window.", b2: "view room.",b3: "go outside" }, 
@@ -50,16 +56,17 @@ function main() {
         window: "You are infront of a large bay window.", 
         window_view: "What a lovely day it is.", 
         window_meditate:"Ah and so we continue along the path of enlightenment.", 
-        outside: "What a lovely day. Perhaps, too nice to even go to work?", "Work":"Another day of hard labor, little pay, and medocrity.", 
+        outside: "What a lovely day. Perhaps, too nice to even go to work?", 
+        work:"Another day of hard labor, little pay, and medocrity.", 
         park: "Ah the park. Sometimes you just got to get outside. I wish I could share this day with someone else.", 
         kill: "Violent eh? YOU PSYCOPATH! THERE IS SO MUCH BLOOD!", 
-        coffee: "Buona coffee, not too bad I should get some for home.",
+        coffee: `Buona coffee, not too bad I should get some for home. \n Dollars made: $${income}.\n Dollars till level up in social class: $${thresh}`,
         busted: "great. now you've done it you're so busted.", "Jail":`You're in jail. You have no more options. Enjoy! clicks remaining: ${clicks}`, 
         conversation:"Beautiful day isn't it? <br> Stranger: Almost as beautiful as you.",
         date:"It is nice to spend time with someone other than myself. <br> Stranger: Yeah, it sure is. <br> I feel like I am stuck in a circle. I don't know how to get out. <br> Stranger: Life is just a recollection of a past that has yet present itself. <br> This seems like deja vu. ",
-        dancing: "You are in a crowded nightclub with loud music",
-        drunk: `You puke all over your date: Alcohol tolerance: ${drinks}`,
-        drugs:`You are high on drugs. Hits left until overdose: ${hits} `,
+        dancing: `You are in a crowded nightclub with loud music\n Money: ${income}`,
+        drunk: `You puke all over your date: Alcohol tolerance: ${drinks} \n Money: ${income}`,
+        drugs:`You are high on drugs. Hits left until overdose: ${hits} \n Money: ${income}`,
         death:`You're wasted. Hope you enjoyed life.`, 
         };
 
@@ -157,17 +164,25 @@ function main() {
             button2.innerHTML = storyChoice.drunk.b2;
             button3.innerHTML = storyChoice.drunk.b3;
             UI_body.style.backgroundImage = "url('https://i.gifer.com/IbdT.gif')";
+            alcoholSimulation();
             state = "Drunk";
             break;
         case "Drugs": UI_text.innerHTML = story.drugs;
             button1.innerHTML = storyChoice.drugs.b1;
             button2.innerHTML = storyChoice.drugs.b2;
             button3.innerHTML = storyChoice.drugs.b3;
+            drugSimulation();
             state = "Drugs";
             break;
         case "Dancing": UI_text.innerHTML = story.dancing;
-            button1.innerHTML = storyChoice.dancing.b1;
-            button2.innerHTML = storyChoice.dancing.b2;
+            if(income > 0){
+                button1.innerHTML = storyChoice.dancing.b1;
+                button2.innerHTML = storyChoice.dancing.b2;
+            }
+            else{
+                button1.innerHTML = "You don't have enough money to this activity."
+                button2.innerHTML = "You don't have enough money to this activity."
+            }
             button3.innerHTML = storyChoice.dancing.b3;
             UI_body.style.backgroundImage = "url('https://media.giphy.com/media/C3EAt5F9qfHPO/giphy.gif')";
             break;
@@ -203,7 +218,15 @@ function buttonOneClick() {
             break;
         case "Date": state = "Kill";
             break;
-        case "Dancing": state = "Drunk";
+        case "Dancing": if(income > 0){
+                            income--;
+                            drinks--;
+                            alcoholSimulation();
+                            state = "Drunk";
+                        }
+                        else{
+
+                        } 
             break;
         // Jail is special because the user needs
         // to click any of the buttons to leave
@@ -217,24 +240,32 @@ function buttonOneClick() {
                     }
             break;
 
-        case "Drugs": hits--;
-                    drugSimulation();
-                    if(hits < 0){
-                        hits = 20;
-                        state = "Death";
+        case "Drugs": 
+                    if(income > 0){
+                        income--;
+                        hits--;
+                        drugSimulation();
+                        if(hits < 0){
+                            hits = 20;
+                            state = "Death";
+                        }
                     }
             break;
         // once the user has died we reset the animation for the buttons back to the original animation.
         case "Death": state = "Home";
                     resetAnimation();
             break;
-        case "Drunk": drinks--;
+        case "Drunk": 
+                if(income > 0){
+                    income--;
+                    drinks--;
                     // this function makes the buttons move in big swinging motions.
                     alcoholSimulation();
                     if(drinks < 0){
                         drinks = 12;
                         state = "Death";
                     }
+                }
             break;
         default:
     }
@@ -257,6 +288,8 @@ function buttonTwoClick() {
         // If the user is at work the second button should cause them 
         // to sober up. So, we reset the animation. 
         case "Work": resetAnimation(); 
+                     income += 1;
+                     classStandingCalc();
                     state = "Coffee";
             break;
         case "Kill": state = "Busted";
@@ -267,11 +300,39 @@ function buttonTwoClick() {
             break;
         case "Date": state = "Dancing";
             break;
-        case "Dancing": state = "Drugs";
+        case "Dancing": if(income > 0) {
+                            income--;
+                            hits--; 
+                            drugSimulation();
+                            state = "Drugs";
+                        }
+                        else{
+                        
+                        }
             break;
-        case "Drugs": state = "Drunk";
+        case "Drugs": 
+                if(income > 0){
+                    income--;
+                    drinks--;
+                    // this function makes the buttons move in big swinging motions.
+                    alcoholSimulation();
+                    if(drinks < 0){
+                        drinks = 12;
+                        state = "Death";
+                    }
+                    state = "Drunk";
+                }
             break;
-        case "Drunk": state = "Drugs";
+        case "Drunk": 
+                    if(income > 0) {
+                        income--;
+                        hits--;
+                        drugSimulation(); 
+                        state = "Drugs";
+                    }
+                    else{
+                    
+                    }
             break;
         case "Jail": clicks--;
                     if(clicks < 0){
@@ -378,4 +439,13 @@ function resetAnimation(){
         $(this).css("animation",`shake 0s`);
         $(this).css("animation-iteration-count", "infinite");
     });
+}
+
+function classStandingCalc(){
+
+    thresh = thresh - income/income;
+    if(thresh <= 0){
+        thresh = 1000;
+    }
+
 }
