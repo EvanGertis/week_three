@@ -1,6 +1,6 @@
 
 // gloabal variable to keep track of current state;
-let state = "Jail";
+let state = "Home";
 
 // set inputs for UI buttons.
 button1 = document.getElementById('button-one');
