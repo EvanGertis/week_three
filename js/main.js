@@ -247,31 +247,31 @@ let thresh = 1000;
 
 // Button states. Each state has three button options. These are used to travese the story tree.
 storyChoice = { 
-    home: { b1: "view window.", b2: "view room.",b3: "go outside" }, 
-    window: { b1: "look out window", b2: "meditate", b3: "return to room" }, 
-    outside: { b1: "go to work.", b2: "go to the park.", b3: "return home."}, 
-    work: { b1: "kill your boss.", b2: "drink coffee and get to work.", b3: "return home."}, 
-    park: { b1: "start a conversation with a stranger.", b2: "go to work.", b3: "return home."}, 
-    kill: {b1: "clean up the blood.", b2: "confess to what you've done.", b3: "drink coffee."},  
-    busted: {b1: "play again?", b2: "go to jail", b3: "----"},
+    home: { b1: "VIEW WINDOW.", b2: "VIEW ROOM.",b3: "GO OUTSIDE." }, 
+    window: { b1: "LOOK OUT WINDOW.", b2: "MEDITATE.", b3: "RETURN TO ROOM." }, 
+    outside: { b1: "GO TO WORK.", b2: "GO TO THE PARK.", b3: "RETURN HOME."}, 
+    work: { b1: "KILL BOSS.", b2: "DRINK COFFEE AND WORK.", b3: "RETURN HOME."}, 
+    park: { b1: "CONVERSE WITH RANDOM STRANGER.", b2: "GO TO WORK.", b3: "RETURN HOME."}, 
+    kill: {b1: "CLEAN UP BLOOD.", b2: "CONFESS.", b3: "CASUALLY DRINK COFFEE."},  
+    busted: {b1: "PLAY AGAIN?", b2: "GO TO JAIL", b3: "----"},
     jail: {b1: "----", b2: "----", b3: "----"}, 
-    conversation: {b1: "kill them.", b2: "go on date.", b3: "go home."},
-    date: {b1: "Kill your date.", b2: "Go dancing.", b3: "Go home."},
-    dancing: {b1: "Get drunk.", b2: "Get high.", b3: "Go home."},
-    drugs: {b1: "Do more drugs.", b2: "Get drunk.", b3: "Go home."},
-    drunk: {b1: "''I'm okay!'', keep drinking.", b2: "Do some drugs.", b3: "Go home."},
-    busted: {b1: "play again?", b2: "go to jail.", b3: "----"},
-    death: {b1: "play again?", b2: "-----", b3: "----"}
+    conversation: {b1: "KILL THEM.", b2: "GO ON DATE.", b3: "RETURN HOME."},
+    date: {b1: "KILL DATE.", b2: "GO TO NIGHTCLUB.", b3: "RETURN HOME."},
+    dancing: {b1: "GET DRUNK.", b2: "GET HIGH.", b3: "RETURN HOME."},
+    drugs: {b1: "DO MORE DRUGS.", b2: "GET DRUNK.", b3: "RETURN HOME."},
+    drunk: {b1: "''I'm okay!'', KEEP DRINKING.", b2: "GET HIGH.", b3: "RETURN HOME."},
+    busted: {b1: "PLAY AGAIN?", b2: "GO TO JAIL.", b3: "----"},
+    death: {b1: "PLAY AGAIN?", b2: "-----", b3: "----"}
     };
 
 
 // ***************************************************************************
-// |---- |\  | ---_--- |----  |--\   |  | |---- |--\ |----
-// |--   | \ |    |    |--    |--/   |--| |--   |--/ |--
-// |---- |  \|    |    |----  |\_    |  | |---- |\_  |----
+// |---- |\  | ---_--- |----  |---\   |  | |---- |---\ |----
+// |--   | \ |    |    |--    |_ _/   |--| |--   |_ _/ |--
+// |---- |  \|    |    |----  |\___   |  | |---- |\___ |----
 // ***************************************************************************
 /**************|*********************/
-/////////******|********//////////////
+/////////****\\|//******//////////////
 //////////****\_/******///////////////
 main();
 /////////////////////////////////////
@@ -279,34 +279,33 @@ main();
 
 
 // ***************************************************************************
-// |---- |\  | ---_--- |----  \_ _/
+// |---- |\  | ---_--- |---\  \_ _/
 // |--   | \ |    |    |_ _/    |
-// |---- |  \|    |    | \_     |
+// |---- |  \|    |    | \__    |
 // ***************************************************************************
-
 function main() {
     
 
     // Story states. This is a JSON where the key is the story state and the value is the paragraph that is displayed in the UI.
     // Needs to be in main to update the clicks in the jail state. 
     story = { 
-        home: "You live in a modest house with Ikea furniture and cream colored walls", 
-        home_view: "You have done well for yourself, but this place seems rather empty", 
+        home: "You live in a modest house with Ikea furniture and cream colored walls.", 
+        home_view: "You have done well for yourself, but this place seems rather empty.", 
         window: "You are infront of a large bay window.", 
         window_view: "What a lovely day it is.", 
-        window_meditate:"Ah and so we continue along the path of enlightenment.", 
+        window_meditate:"Ah, so we continue along the path of enlightenment.", 
         outside: "What a lovely day. Perhaps, too nice to even go to work?", 
         work:"Another day of hard labor, little pay, and medocrity.", 
-        park: "Ah the park. Sometimes you just got to get outside. I wish I could share this day with someone else.", 
+        park: "Ah the park, Sometimes you just got to get outside. I wish I could share this day with someone else.", 
         kill: "Violent eh? YOU PSYCOPATH! THERE IS SO MUCH BLOOD!", 
-        coffee: `Buona coffee, not too bad I should get some for home. \n Dollars made: $${income}.\n Dollars till level up in social class: $${thresh}`,
-        busted: "great. now you've done it you're so busted.", 
-        jail:`You're in jail. You have no more options. Enjoy! clicks remaining: ${clicks}`, 
-        conversation:"Beautiful day isn't it? <br> Stranger: Almost as beautiful as you.",
-        date:"It is nice to spend time with someone other than myself. <br> Stranger: Yeah, it sure is. <br> I feel like I am stuck in a circle. I don't know how to get out. <br> Stranger: Life is just a recollection of a past that has yet present itself. <br> This seems like deja vu. ",
-        dancing: `You are in a crowded nightclub with loud music\n Money: ${income}`,
-        drunk: `You puke all over your date: Alcohol tolerance: ${drinks} \n Money: ${income}`,
-        drugs:`You are high on drugs. Hits left until overdose: ${hits} \n Money: ${income}`,
+        coffee: `Love me some Buona coffee, es muy bueno. I should get some for home. clickity-clack-clack (keyboard clicking ensues)... \n Dollars made: $${income}.\n Dollars till level up in social class: $${thresh}`,
+        busted: "Great now you've done it. You're so busted.", 
+        jail:`You're in jail. You have no more options- Enjoy! <br> Clicks remaining: ${clicks}`, 
+        conversation:"Beautiful day isn't it? <br> Stranger: Almost as beautiful as you are.",
+        date:"It is so nice to spend time with someone other than myself! <br> Stranger: Yeah, it sure is. <br> I feel like I am going in circles. I don't know how to get out. <br> Stranger: Life is just a recollection of a past that has yet present itself. <br> This seems like deja vu. ",
+        dancing: `You are in a crowded nightclub with loud music. (thump thump thump)... (electronic music ensues)\n Money: ${income}`,
+        drunk: `You puke all over your date. \n Alcohol tolerance: ${drinks} \n Money: ${income}`,
+        drugs:`You are high on drugs. \n Hits left until overdose: ${hits} \n Money: ${income}`,
         death:`You're wasted. Hope you enjoyed life.`, 
         };
 
@@ -420,8 +419,8 @@ function main() {
                 button2.innerHTML = storyChoice.dancing.b2;
             }
             else{
-                button1.innerHTML = "You don't have enough money to this activity."
-                button2.innerHTML = "You don't have enough money to this activity."
+                button1.innerHTML = "NOT ENOUGH $$."
+                button2.innerHTML = "NOT ENOUGH $$."
             }
             button3.innerHTML = storyChoice.dancing.b3;
             UI_body.style.backgroundImage = "url('https://media.giphy.com/media/C3EAt5F9qfHPO/giphy.gif')";
@@ -436,12 +435,10 @@ function main() {
     }
 
 }
-
-
 // ***************************************************************************
-// |---- |\  |  ---- 
+// |---- |\  |  |---\ 
 // |--   | \ |  |   \
-// |---- |  \|  |---/
+// |---- |  \|  |_ _/
 // ***************************************************************************
 
 
