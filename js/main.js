@@ -8,12 +8,26 @@ button2 = document.getElementById('button-two');
 button3 = document.getElementById('button-three');
 UI_text = document.getElementById("UI-text");
 UI_body = document.getElementById("UI-body");
+UI_control = document.getElementById("UI-control");
 
-// event listeners to keep track of button clicks.
+// UI controls listener passes event targets into UI input function.
+UI_control.addEventListener("click", UI_input);
 
-button1.addEventListener("click", buttonOneClick);
-button2.addEventListener("click", buttonTwoClick);
-button3.addEventListener("click", buttonThreeClick);
+// interprets the event target and calls the appropriate function.
+function UI_input(e){
+    switch(e.target.id){
+        case "button-one": buttonOneClick();
+            break;
+        case "button-two": buttonTwoClick();
+            break;
+        case "button-three": buttonThreeClick();
+            break;
+        default:
+            break;
+    }
+}
+
+
 
 // this variable is used to keep track of the number of clicks the user needs to make to get out of jail
 let clicks = 30;
