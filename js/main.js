@@ -27,6 +27,207 @@ function UI_input(e){
     }
 }
 
+// BUTTON HANDLERS
+// ***************
+// ***************
+
+function buttonOneClick() {
+
+    switch (state) {
+        case "Home": state = "Window";
+            break;
+        case "Window": state = "Window-view";
+            break;
+        case "Outside": state = "Work";
+            break;
+        case "Park": state = "Conversation";
+            break;
+        case "Work": state = "Kill";
+            break;
+        case "Kill": state = "Busted";
+            break;
+        case "Busted": state = "Home";
+            break;
+        case "Conversation": state = "Kill";
+            break;
+        case "Date": state = "Kill";
+            break;
+        case "Dancing": if(income > 0){
+                            income--;
+                            drinks--;
+                            alcoholSimulation();
+                            state = "Drunk";
+                        }
+                        else{
+
+                        } 
+            break;
+        // Jail is special because the user needs
+        // to click any of the buttons to leave
+        // we need to check the click count
+        // once the click count is reached we 
+        // reset the count and change the state.
+        case "Jail": clicks--;
+                    if(clicks < 0){
+                        clicks = 30;
+                        state = "Home";
+                    }
+            break;
+
+        case "Drugs": 
+                    if(income > 0){
+                        income--;
+                        hits--;
+                        drugSimulation();
+                        if(hits < 0){
+                            hits = 20;
+                            state = "Death";
+                        }
+                    }
+            break;
+        // once the user has died we reset the animation for the buttons back to the original animation.
+        case "Death": state = "Home";
+                    resetAnimation();
+            break;
+        case "Drunk": 
+                if(income > 0){
+                    income--;
+                    drinks--;
+                    // this function makes the buttons move in big swinging motions.
+                    alcoholSimulation();
+                    if(drinks < 0){
+                        drinks = 12;
+                        state = "Death";
+                    }
+                }
+            break;
+        default:
+    }
+
+    main();
+
+}
+
+
+function buttonTwoClick() {
+
+    switch (state) {
+        case "Home": state = "Home-view";
+            break;
+        case "Window": state = "Window-meditate";
+            break;
+        case "Outside": state = "Park";
+            break;
+        case "Park": state = "Work";
+            break;
+        // If the user is at work the second button should cause them 
+        // to sober up. So, we reset the animation. 
+        case "Work": resetAnimation(); 
+                     income += 1;
+                     classStandingCalc();
+                    state = "Coffee";
+            break;
+        case "Kill": state = "Busted";
+            break;
+        case "Busted": state = "Jail";
+            break;
+        case "Conversation": state = "Date";
+            break;
+        case "Date": state = "Dancing";
+            break;
+        case "Dancing": if(income > 0) {
+                            income--;
+                            hits--; 
+                            drugSimulation();
+                            state = "Drugs";
+                        }
+                        else{
+                        
+                        }
+            break;
+        case "Drugs": 
+                if(income > 0){
+                    income--;
+                    drinks--;
+                    // this function makes the buttons move in big swinging motions.
+                    alcoholSimulation();
+                    if(drinks < 0){
+                        drinks = 12;
+                        state = "Death";
+                    }
+                    state = "Drunk";
+                }
+            break;
+        case "Drunk": 
+                    if(income > 0) {
+                        income--;
+                        hits--;
+                        drugSimulation(); 
+                        state = "Drugs";
+                    }
+                    else{
+                    
+                    }
+            break;
+        case "Jail": clicks--;
+                    if(clicks < 0){
+                        clicks = 30;
+                        state = "Home";
+                    }
+            break;
+        default:
+    }
+
+    main();
+
+}
+
+
+function buttonThreeClick() {
+
+    switch (state) {
+        case "Home": state = "Outside";
+            break;
+        case "Window": state = "Home";
+            break;
+        case "Window-view": state = "Home";
+            break;
+        case "Outside": state = "Home";
+            break;
+        case "Park": state = "Home";
+            break;
+        case "Work": state = "Home";
+            break;
+        case "Kill": state = "Busted";
+            break;
+        case "Conversation": state = "Home";
+            break;
+        case "Date": state = "Home";
+            break;
+        case "Dancing": state = "Home";
+            break;
+        case "Drugs": state = "Home";
+            break;
+        case "Drunk": state = "Home";
+            break;
+        case "Jail": clicks--;
+                    if(clicks < 0){
+                        clicks = 30;
+                        state = "Home";
+                    }
+            break;
+        default:
+    }
+
+    main();
+}
+
+
+// END BUTTON HANDLERS
+// ***************
+// ***************
+
+
 
 
 // this variable is used to keep track of the number of clicks the user needs to make to get out of jail
@@ -218,195 +419,7 @@ function main() {
 
 }
 
-function buttonOneClick() {
 
-    switch (state) {
-        case "Home": state = "Window";
-            break;
-        case "Window": state = "Window-view";
-            break;
-        case "Outside": state = "Work";
-            break;
-        case "Park": state = "Conversation";
-            break;
-        case "Work": state = "Kill";
-            break;
-        case "Kill": state = "Busted";
-            break;
-        case "Busted": state = "Home";
-            break;
-        case "Conversation": state = "Kill";
-            break;
-        case "Date": state = "Kill";
-            break;
-        case "Dancing": if(income > 0){
-                            income--;
-                            drinks--;
-                            alcoholSimulation();
-                            state = "Drunk";
-                        }
-                        else{
-
-                        } 
-            break;
-        // Jail is special because the user needs
-        // to click any of the buttons to leave
-        // we need to check the click count
-        // once the click count is reached we 
-        // reset the count and change the state.
-        case "Jail": clicks--;
-                    if(clicks < 0){
-                        clicks = 30;
-                        state = "Home";
-                    }
-            break;
-
-        case "Drugs": 
-                    if(income > 0){
-                        income--;
-                        hits--;
-                        drugSimulation();
-                        if(hits < 0){
-                            hits = 20;
-                            state = "Death";
-                        }
-                    }
-            break;
-        // once the user has died we reset the animation for the buttons back to the original animation.
-        case "Death": state = "Home";
-                    resetAnimation();
-            break;
-        case "Drunk": 
-                if(income > 0){
-                    income--;
-                    drinks--;
-                    // this function makes the buttons move in big swinging motions.
-                    alcoholSimulation();
-                    if(drinks < 0){
-                        drinks = 12;
-                        state = "Death";
-                    }
-                }
-            break;
-        default:
-    }
-
-    main();
-
-}
-
-function buttonTwoClick() {
-
-    switch (state) {
-        case "Home": state = "Home-view";
-            break;
-        case "Window": state = "Window-meditate";
-            break;
-        case "Outside": state = "Park";
-            break;
-        case "Park": state = "Work";
-            break;
-        // If the user is at work the second button should cause them 
-        // to sober up. So, we reset the animation. 
-        case "Work": resetAnimation(); 
-                     income += 1;
-                     classStandingCalc();
-                    state = "Coffee";
-            break;
-        case "Kill": state = "Busted";
-            break;
-        case "Busted": state = "Jail";
-            break;
-        case "Conversation": state = "Date";
-            break;
-        case "Date": state = "Dancing";
-            break;
-        case "Dancing": if(income > 0) {
-                            income--;
-                            hits--; 
-                            drugSimulation();
-                            state = "Drugs";
-                        }
-                        else{
-                        
-                        }
-            break;
-        case "Drugs": 
-                if(income > 0){
-                    income--;
-                    drinks--;
-                    // this function makes the buttons move in big swinging motions.
-                    alcoholSimulation();
-                    if(drinks < 0){
-                        drinks = 12;
-                        state = "Death";
-                    }
-                    state = "Drunk";
-                }
-            break;
-        case "Drunk": 
-                    if(income > 0) {
-                        income--;
-                        hits--;
-                        drugSimulation(); 
-                        state = "Drugs";
-                    }
-                    else{
-                    
-                    }
-            break;
-        case "Jail": clicks--;
-                    if(clicks < 0){
-                        clicks = 30;
-                        state = "Home";
-                    }
-            break;
-        default:
-    }
-
-    main();
-
-}
-
-
-function buttonThreeClick() {
-
-    switch (state) {
-        case "Home": state = "Outside";
-            break;
-        case "Window": state = "Home";
-            break;
-        case "Window-view": state = "Home";
-            break;
-        case "Outside": state = "Home";
-            break;
-        case "Park": state = "Home";
-            break;
-        case "Work": state = "Home";
-            break;
-        case "Kill": state = "Busted";
-            break;
-        case "Conversation": state = "Home";
-            break;
-        case "Date": state = "Home";
-            break;
-        case "Dancing": state = "Home";
-            break;
-        case "Drugs": state = "Home";
-            break;
-        case "Drunk": state = "Home";
-            break;
-        case "Jail": clicks--;
-                    if(clicks < 0){
-                        clicks = 30;
-                        state = "Home";
-                    }
-            break;
-        default:
-    }
-
-    main();
-}
 
 function jailSimulation(){
     clicks = 30;
