@@ -1,6 +1,6 @@
 
 // gloabal variable to keep track of current state;
-let state = "Home";
+let state = "Jail";
 
 // set inputs for UI buttons.
 button1 = document.getElementById('button-one');
@@ -52,7 +52,7 @@ function buttonOneClick() {
             break;
         case "Date": state = "Kill";
             break;
-        case "Dancing": if(income > 0){
+        case "Dancing": if(income > 3){
                             income--;
                             drinks--;
                             alcoholSimulation();
@@ -103,6 +103,18 @@ function buttonOneClick() {
             break;
         case "Hack": state = "Work";
                 break;
+        case "Shank": state = "Laugh";
+                break;
+        case "Laugh": state = "Fire";
+                break;     
+        case "Execute": state = "Death";
+                    break;   
+        case "Riot": state = "Fire";
+                    break;
+        case "Fire": state = "Death";
+                    break;
+        case "Weep": state = "Death";
+                    break;
         default:
     }
 
@@ -171,15 +183,30 @@ function buttonTwoClick() {
                     
                     }
             break;
-        case "Jail": clicks--;
-                    if(clicks < 0){
-                        clicks = 30;
-                        state = "Home";
+        case "Jail": 
+                    if(income >= 100){
+                        income -= 100;
+                        state = "Riot";
                     }
+            break;
+        case "Laugh": state = "Execute"
             break;
         case "Hack": state = "Home";
                     break;
+        case "Shank": state = "Weep";
+                    break;
+        case "Execute": 
+                    if(income >= 100){
+                        income -= 100;
+                        state = "Riot";
+                    }
+                    break;
+        case "Riot": state = "Execute";
+                    break;
+        case "Fire": state = "Execute";
+                    break;
         default:
+                    break;
     }
 
     main();
@@ -214,15 +241,28 @@ function buttonThreeClick() {
             break;
         case "Drunk": state = "Home";
             break;
-        case "Jail": clicks--;
-                    if(clicks < 0){
-                        clicks = 30;
-                        state = "Home";
-                    }
+        case "Jail": state = "Shank";
             break;
         case "Hack": state = "Kill";
                     break;
+        case "Shank": 
+                    if(income >= 100){
+                        income -= 100;
+                        state = "Riot";
+                    }
+                    break;
+        case "Laugh": state = "Home";
+                    break;
+        case "Execute": state = "Home";
+                    break;
+        case "Riot": state = "Home";
+                    break;
+        case "Fire": state = "Home";
+                    break;
+        case "Weep": state = "Home";
+                    break;
         default:
+                    break;
     }
 
     main();
@@ -260,7 +300,7 @@ storyChoice = {
     park: { b1: "CONVERSE WITH RANDOM STRANGER.", b2: "GO TO WORK.", b3: "RETURN HOME."}, 
     kill: {b1: "CLEAN UP BLOOD.", b2: "CONFESS.", b3: "CASUALLY DRINK COFFEE."},  
     busted: {b1: "PLAY AGAIN?", b2: "GO TO JAIL", b3: "----"},
-    jail: {b1: "----", b2: "----", b3: "----"}, 
+    jail: {b1: "CLICK AWAY YOUR PRISON TIME.", b2: "PAY GOONS TO RIOT. COST $100", b3: "STAB GUARD WITH SHANK"}, 
     conversation: {b1: "KILL THEM.", b2: "GO ON DATE.", b3: "RETURN HOME."},
     date: {b1: "KILL DATE.", b2: "GO TO NIGHTCLUB.", b3: "RETURN HOME."},
     dancing: {b1: "GET DRUNK.", b2: "GET HIGH.", b3: "RETURN HOME."},
@@ -268,7 +308,13 @@ storyChoice = {
     drunk: {b1: "''I'm okay!'', KEEP DRINKING.", b2: "GET HIGH.", b3: "RETURN HOME."},
     busted: {b1: "PLAY AGAIN?", b2: "GO TO JAIL.", b3: "----"},
     death: {b1: "PLAY AGAIN?", b2: "-----", b3: "----"},
-    hack:  {b1: "RETURN TO WORK.", b2:"GO HOME", b3:"KILL BOSS"}
+    hack:  {b1: "RETURN TO WORK.", b2:"GO HOME", b3:"KILL BOSS"},
+    shank:  {b1: "LAUGH WILDLY.", b2:"WEEP IN PITTY.", b3:"PAY GOONS TO RIOT. COST $100"},
+    riot: {b1: "LIGHT TOILET PAPER FIRE.", b2:"EXECUTE CELL MATE.", b3:"ESCAPE JAIL."},
+    laugh: {b1: "LIGHT TOILET PAPER FIRE.", b2:"EXECUTE CELL MATE.", b3:"ESCAPE JAIL."},
+    execute: {b1: "GO OUT IN GLORY.", b2:"PAY GOONS TO RIOT COST $100.", b3:"ESCAPE JAIL."},
+    fire:{b1: "GO OUT IN GLORY.", b2:"EXECUTE CELL MATE.", b3:"ESCAPE JAIL."},
+    weep:{b1: "GO OUT IN GLORY.", b2:"------", b3:"ESCAPE JAIL."}
     };
 
 
@@ -307,14 +353,20 @@ function main() {
         kill: "Violent eh? YOU PSYCOPATH! THERE IS SO MUCH BLOOD!", 
         coffee: `Love me some Buona coffee, es muy bueno. I should get some for home. clickity-clack-clack (keyboard clicking ensues)... \n Dollars made: $${income}.\n Dollars till level up in social class: $${thresh}`,
         busted: "Great now you've done it. You're so busted.", 
-        jail:`You're in jail. You have no more options- Enjoy! <br> Clicks remaining: ${clicks}`, 
+        jail:`You're in jail. You have no more options- Enjoy! <br> Clicks remaining: ${clicks} <br>  Money: ${income}`, 
         conversation:"Beautiful day isn't it? <br> Stranger: Almost as beautiful as you are.",
         date:"It is so nice to spend time with someone other than myself! <br> Stranger: Yeah, it sure is. <br> I feel like I am going in circles. I don't know how to get out. <br> Stranger: Life is just a recollection of a past that has yet present itself. <br> This seems like deja vu. ",
         dancing: `You are in a crowded nightclub with loud music. (thump thump thump)... (electronic music ensues)\n Money: ${income}`,
         drunk: `You puke all over your date. \n Alcohol tolerance: ${drinks} \n Money: ${income}`,
         drugs:`You are high on drugs. \n Hits left until overdose: ${hits} \n Money: ${income}`,
         death:`You're wasted. Hope you enjoyed life.`,
-        hack:"" 
+        hack:"",
+        shank:`You just jabbed a shank through the prison guards eye socket. \n Money: ${income}`,
+        riot:"You are the danger. You the power. You are the violence. Enjoy your rage.",
+        laugh: `HA H A HA H A HAA (Y o u   a r e  p s y c h o) \n Money: ${income}`,
+        execute:`You murdered your cell mate with a jagged piece of metal. \n Money: ${income}`,
+        fire:`Burn! Burn! Burn it all! (You are overcome with rage). \n Money: ${income}`,
+        weep:"Why hast thou fallen from grace?"
         };
 
     switch (state) {
@@ -446,7 +498,42 @@ function main() {
             button3.innerHTML = storyChoice.hack.b3;
             UI_body.style.backgroundImage = "url('http://vignette3.wikia.nocookie.net/matrix/images/9/9c/Matrix_Code.gif/revision/latest/scale-to-width-down/800?cb=20110306191618')";
             break;
-            
+        case "Shank" : UI_text.innerHTML = story.shank;
+            button1.innerHTML = storyChoice.shank.b1;
+            button2.innerHTML = storyChoice.shank.b2;
+            button3.innerHTML = storyChoice.shank.b3;
+            UI_body.style.backgroundImage = "url('https://theyearofhalloween.files.wordpress.com/2014/10/horror-gif-friday-the-13th-eye-stab.gif')";
+            break;
+        case "Riot" : UI_text.innerHTML = story.riot;
+            button1.innerHTML = storyChoice.riot.b1;
+            button2.innerHTML = storyChoice.riot.b2;
+            button3.innerHTML = storyChoice.riot.b3;
+            UI_body.style.backgroundImage = "url('https://media.giphy.com/media/OCi7GMmsfl8aI/giphy.gif')";
+            break;
+        case "Laugh" : UI_text.innerHTML = story.laugh;
+            button1.innerHTML = storyChoice.laugh.b1;
+            button2.innerHTML = storyChoice.laugh.b2;
+            button3.innerHTML = storyChoice.laugh.b3;
+            UI_body.style.backgroundImage = "url('https://i.gifer.com/6yK.gif')";
+            break;
+        case "Execute" : UI_text.innerHTML = story.execute;
+            button1.innerHTML = storyChoice.execute.b1;
+            button2.innerHTML = storyChoice.execute.b2;
+            button3.innerHTML = storyChoice.execute.b3;
+            UI_body.style.backgroundImage = "url('https://thumbs.gfycat.com/OddballRevolvingGraysquirrel-size_restricted.gif')";
+            break;
+        case "Fire" : UI_text.innerHTML = story.fire;
+            button1.innerHTML = storyChoice.fire.b1;
+            button2.innerHTML = storyChoice.fire.b2;
+            button3.innerHTML = storyChoice.fire.b3;
+            UI_body.style.backgroundImage = "url('https://thumbs.gfycat.com/HairyMammothArctichare-size_restricted.gif')";
+            break;
+        case "Weep" : UI_text.innerHTML = story.weep;
+            button1.innerHTML = storyChoice.weep.b1;
+            button2.innerHTML = storyChoice.weep.b2;
+            button3.innerHTML = storyChoice.weep.b3;
+            UI_body.style.backgroundImage = "url('https://steamusercontent-a.akamaihd.net/ugc/920290112591130081/DBE9066FE242CF18CBFB9812646618E0019BD444/')";
+            break;
         default:
     }
 
@@ -503,7 +590,7 @@ function jailSimulation(){
 
     while(clicks > 0){
         
-        if(button1.clicked == true || button2.clicked == true || button3.clicked == true){
+        if(button1.clicked == true){
             clicks--;
         }
         
