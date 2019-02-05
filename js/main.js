@@ -101,6 +101,8 @@ function buttonOneClick() {
                     }
                 }
             break;
+        case "Hack": state = "Work";
+                break;
         default:
     }
 
@@ -175,6 +177,8 @@ function buttonTwoClick() {
                         state = "Home";
                     }
             break;
+        case "Hack": state = "Home";
+                    break;
         default:
     }
 
@@ -196,7 +200,7 @@ function buttonThreeClick() {
             break;
         case "Park": state = "Home";
             break;
-        case "Work": state = "Home";
+        case "Work": state = "Hack";
             break;
         case "Kill": state = "Busted";
             break;
@@ -216,6 +220,8 @@ function buttonThreeClick() {
                         state = "Home";
                     }
             break;
+        case "Hack": state = "Kill";
+                    break;
         default:
     }
 
@@ -250,7 +256,7 @@ storyChoice = {
     home: { b1: "VIEW WINDOW.", b2: "VIEW ROOM.",b3: "GO OUTSIDE." }, 
     window: { b1: "LOOK OUT WINDOW.", b2: "MEDITATE.", b3: "RETURN TO ROOM." }, 
     outside: { b1: "GO TO WORK.", b2: "GO TO THE PARK.", b3: "RETURN HOME."}, 
-    work: { b1: "KILL BOSS.", b2: "DRINK COFFEE AND WORK.", b3: "RETURN HOME."}, 
+    work: { b1: "KILL BOSS.", b2: "DRINK COFFEE AND WORK.", b3: "HACK YOUR BOSS."}, 
     park: { b1: "CONVERSE WITH RANDOM STRANGER.", b2: "GO TO WORK.", b3: "RETURN HOME."}, 
     kill: {b1: "CLEAN UP BLOOD.", b2: "CONFESS.", b3: "CASUALLY DRINK COFFEE."},  
     busted: {b1: "PLAY AGAIN?", b2: "GO TO JAIL", b3: "----"},
@@ -261,7 +267,8 @@ storyChoice = {
     drugs: {b1: "DO MORE DRUGS.", b2: "GET DRUNK.", b3: "RETURN HOME."},
     drunk: {b1: "''I'm okay!'', KEEP DRINKING.", b2: "GET HIGH.", b3: "RETURN HOME."},
     busted: {b1: "PLAY AGAIN?", b2: "GO TO JAIL.", b3: "----"},
-    death: {b1: "PLAY AGAIN?", b2: "-----", b3: "----"}
+    death: {b1: "PLAY AGAIN?", b2: "-----", b3: "----"},
+    hack:  {b1: "RETURN TO WORK.", b2:"GO HOME", b3:"KILL BOSS"}
     };
 
 
@@ -306,7 +313,8 @@ function main() {
         dancing: `You are in a crowded nightclub with loud music. (thump thump thump)... (electronic music ensues)\n Money: ${income}`,
         drunk: `You puke all over your date. \n Alcohol tolerance: ${drinks} \n Money: ${income}`,
         drugs:`You are high on drugs. \n Hits left until overdose: ${hits} \n Money: ${income}`,
-        death:`You're wasted. Hope you enjoyed life.`, 
+        death:`You're wasted. Hope you enjoyed life.`,
+        hack:"" 
         };
 
     switch (state) {
@@ -431,6 +439,14 @@ function main() {
             button3.innerHTML = storyChoice.death.b3;
             UI_body.style.backgroundImage = "url('https://media.giphy.com/media/YwAgyCddum3K0/giphy.gif')";
             break;
+        case "Hack" : UI_text.innerHTML = story.hack;
+            hackingSimulation();
+            button1.innerHTML = storyChoice.hack.b1;
+            button2.innerHTML = storyChoice.hack.b2;
+            button3.innerHTML = storyChoice.hack.b3;
+            UI_body.style.backgroundImage = "url('http://vignette3.wikia.nocookie.net/matrix/images/9/9c/Matrix_Code.gif/revision/latest/scale-to-width-down/800?cb=20110306191618')";
+            break;
+            
         default:
     }
 
@@ -441,6 +457,44 @@ function main() {
 // |---- |  \|  |_ _/
 // ***************************************************************************
 
+
+//////////////////////////////////////////////////////////////////
+//  /---  ----- /\  /\ |   | |      /\  ----- -----  ---- |\  | //
+//  \_ _    |   | \/ | |   | |     |--|   |     |    |  | | \ | //
+//   _ _/ __|__ |    | \_ _/ |_ _  |  |   |   __|__  |_ | |  \| //
+//////////////////////////////////////////////////////////////////
+
+
+
+function hackingSimulation(){
+        let hackingContainer = document.createElement('form');
+        hackingContainer.style.textAlign = "center";
+        hackingContainer.style.display = "inline-block";
+
+        let username = document.createElement('input');
+        username.value = "Mark Zuckerberg";
+        username.type = "text";
+        
+
+        let password = document.createElement('input');
+        password.placeholder = "password";
+        password.type = "password";
+
+        let submit = document.createElement('input');
+        submit.type = "submit";
+        
+        submit.addEventListener("click", passwordCrack);
+
+        hackingContainer.append(username);
+        hackingContainer.append(password);
+        hackingContainer.append(submit);
+        UI_text.append(hackingContainer);
+
+}
+
+function passwordCrack(e){
+    e.target.parentNode.innerHTML = "You're in, but it turns out your boss just keeps pictures of himself on here.";
+}
 
 
 function jailSimulation(){
@@ -459,6 +513,7 @@ function jailSimulation(){
     main();
 
 }
+
 
 function drugSimulation(){
     $('button').hover(function(){
@@ -505,3 +560,8 @@ function classStandingCalc(){
     }
 
 }
+//////////////////////////////////////////////////////////////////
+//  /---  ----- /\  /\ |   | |      /\  ----- -----  ---- |\  | //
+//  \_ _    |   | \/ | |   | |     |--|   |     |    |  | | \ | //
+//   _ _/ __|__ |    | \_ _/ |_ _  |  |   |   __|__  |_ | |  \| //
+//////////////////////////////////////////////////////////////////
