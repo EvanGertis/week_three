@@ -426,6 +426,8 @@ function main() {
             button2.innerHTML = storyChoice.kill.b2;
             button3.innerHTML = storyChoice.kill.b3;
             UI_body.style.backgroundImage = "url('https://thumbs.gfycat.com/BlondNiftyHochstettersfrog-max-1mb.gif')";
+            UI_body.style.backgroundRepeat = "no-repeat";
+            UI_body.style.backgroundSize = "100%";
             break;
         case "Coffee": UI_text.innerHTML = story.coffee;
             button1.innerHTML = storyChoice.work.b1;
@@ -439,6 +441,8 @@ function main() {
             button2.innerHTML = storyChoice.busted.b2;
             button3.innerHTML = storyChoice.busted.b3;
             UI_body.style.backgroundImage = "url('https://www.lequzhai.com/data/out/12/497132.gif')";
+            UI_body.style.backgroundRepeat = "no-repeat";
+            UI_body.style.backgroundSize = "100%";
             break;
         case "Jail": UI_text.innerHTML = story.jail;
             button1.innerHTML = storyChoice.jail.b1;
@@ -463,6 +467,8 @@ function main() {
             button2.innerHTML = storyChoice.drunk.b2;
             button3.innerHTML = storyChoice.drunk.b3;
             UI_body.style.backgroundImage = "url('https://i.gifer.com/IbdT.gif')";
+            UI_body.style.backgroundRepeat = "no-repeat";
+            UI_body.style.backgroundSize = "100%";
             alcoholSimulation();
             state = "Drunk";
             break;
@@ -484,12 +490,16 @@ function main() {
             }
             button3.innerHTML = storyChoice.dancing.b3;
             UI_body.style.backgroundImage = "url('https://media.giphy.com/media/C3EAt5F9qfHPO/giphy.gif')";
+            UI_body.style.backgroundRepeat = "no-repeat";
+            UI_body.style.backgroundSize = "100%";
             break;
         case "Death": UI_text.innerHTML = story.death;
             button1.innerHTML = storyChoice.death.b1;
             button2.innerHTML = storyChoice.death.b2;
             button3.innerHTML = storyChoice.death.b3;
             UI_body.style.backgroundImage = "url('https://media.giphy.com/media/YwAgyCddum3K0/giphy.gif')";
+            UI_body.style.backgroundRepeat = "no-repeat";
+            UI_body.style.backgroundSize = "100%";
             break;
         case "Hack" : UI_text.innerHTML = story.hack;
             hackingSimulation();
@@ -497,42 +507,56 @@ function main() {
             button2.innerHTML = storyChoice.hack.b2;
             button3.innerHTML = storyChoice.hack.b3;
             UI_body.style.backgroundImage = "url('http://vignette3.wikia.nocookie.net/matrix/images/9/9c/Matrix_Code.gif/revision/latest/scale-to-width-down/800?cb=20110306191618')";
+
+            UI_body.style.backgroundSize = "100%";
             break;
         case "Shank" : UI_text.innerHTML = story.shank;
             button1.innerHTML = storyChoice.shank.b1;
             button2.innerHTML = storyChoice.shank.b2;
             button3.innerHTML = storyChoice.shank.b3;
             UI_body.style.backgroundImage = "url('https://theyearofhalloween.files.wordpress.com/2014/10/horror-gif-friday-the-13th-eye-stab.gif')";
+            UI_body.style.backgroundRepeat = "no-repeat";
+            UI_body.style.backgroundSize = "100%";
             break;
         case "Riot" : UI_text.innerHTML = story.riot;
             button1.innerHTML = storyChoice.riot.b1;
             button2.innerHTML = storyChoice.riot.b2;
             button3.innerHTML = storyChoice.riot.b3;
             UI_body.style.backgroundImage = "url('https://media.giphy.com/media/OCi7GMmsfl8aI/giphy.gif')";
+            UI_body.style.backgroundRepeat = "no-repeat";
+            UI_body.style.backgroundSize = "100%";
             break;
         case "Laugh" : UI_text.innerHTML = story.laugh;
             button1.innerHTML = storyChoice.laugh.b1;
             button2.innerHTML = storyChoice.laugh.b2;
             button3.innerHTML = storyChoice.laugh.b3;
             UI_body.style.backgroundImage = "url('https://i.gifer.com/6yK.gif')";
+            UI_body.style.backgroundRepeat = "no-repeat";
+            UI_body.style.backgroundSize = "100%";
             break;
         case "Execute" : UI_text.innerHTML = story.execute;
             button1.innerHTML = storyChoice.execute.b1;
             button2.innerHTML = storyChoice.execute.b2;
             button3.innerHTML = storyChoice.execute.b3;
             UI_body.style.backgroundImage = "url('https://thumbs.gfycat.com/OddballRevolvingGraysquirrel-size_restricted.gif')";
+            UI_body.style.backgroundRepeat = "no-repeat";
+            UI_body.style.backgroundSize = "100%";
             break;
         case "Fire" : UI_text.innerHTML = story.fire;
             button1.innerHTML = storyChoice.fire.b1;
             button2.innerHTML = storyChoice.fire.b2;
             button3.innerHTML = storyChoice.fire.b3;
             UI_body.style.backgroundImage = "url('https://thumbs.gfycat.com/HairyMammothArctichare-size_restricted.gif')";
+            UI_body.style.backgroundRepeat = "no-repeat";
+            UI_body.style.backgroundSize = "100%";
             break;
         case "Weep" : UI_text.innerHTML = story.weep;
             button1.innerHTML = storyChoice.weep.b1;
             button2.innerHTML = storyChoice.weep.b2;
             button3.innerHTML = storyChoice.weep.b3;
             UI_body.style.backgroundImage = "url('https://steamusercontent-a.akamaihd.net/ugc/920290112591130081/DBE9066FE242CF18CBFB9812646618E0019BD444/')";
+            UI_body.style.backgroundRepeat = "no-repeat";
+            UI_body.style.backgroundSize = "100%";
             break;
         default:
     }
@@ -582,6 +606,8 @@ function hackingSimulation(){
 function passwordCrack(e){
     e.target.parentNode.innerHTML = "You're in, but it turns out your boss just keeps pictures of himself on here.";
     UI_body.style.backgroundImage = "url('https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTQyMDA0NDgwMzUzNzcyNjA2/mark-zuckerberg_gettyimages-512304736jpg.jpg')";
+    UI_body.style.backgroundRepeat = "no-repeat";
+    UI_body.style.backgroundSize = "100%";
 }
 
 
