@@ -9,6 +9,12 @@ button3 = document.getElementById('button-three');
 UI_text = document.getElementById("UI-text");
 UI_body = document.getElementById("UI-body");
 
+// event listeners to keep track of button clicks.
+
+button1.addEventListener("click", buttonOneClick);
+button2.addEventListener("click", buttonTwoClick);
+button3.addEventListener("click", buttonThreeClick);
+
 // this variable is used to keep track of the number of clicks the user needs to make to get out of jail
 let clicks = 30;
 
