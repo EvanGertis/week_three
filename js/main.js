@@ -494,6 +494,7 @@ function hackingSimulation(){
 
 function passwordCrack(e){
     e.target.parentNode.innerHTML = "You're in, but it turns out your boss just keeps pictures of himself on here.";
+    UI_body.style.backgroundImage = "url('https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTQyMDA0NDgwMzUzNzcyNjA2/mark-zuckerberg_gettyimages-512304736jpg.jpg')";
 }
 
 
