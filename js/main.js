@@ -337,7 +337,9 @@ main();
 // |---- |  \|    |    | \__    |
 // ***************************************************************************
 function main() {
-    
+    button1.style.display = "inline-block";
+    button2.style.display = "inline-block";
+    button3.style.display = "inline-block";
 
     // Story states. This is a JSON where the key is the story state and the value is the paragraph that is displayed in the UI.
     // Needs to be in main to update the clicks in the jail state. 
@@ -378,7 +380,7 @@ function main() {
             break;
         case "Home-view": UI_text.innerHTML = story.home_view;
             button1.innerHTML = storyChoice.home.b1;
-            button2.innerHTML = storyChoice.home.b2;
+            button2.style.display = "none";
             button3.innerHTML = storyChoice.home.b3;
             UI_body.style.background = "pink";
             state = "Home";
@@ -390,7 +392,7 @@ function main() {
             UI_body.style.background = "blue";
             break;
         case "Window-view": UI_text.innerHTML = story.window_view;
-            button1.innerHTML = storyChoice.window.b1;
+            button1.style.display = "none";
             button2.innerHTML = storyChoice.window.b2;
             button3.innerHTML = storyChoice.window.b3;
             UI_body.style.background = "blue";
@@ -398,7 +400,7 @@ function main() {
             break;
         case "Window-meditate": UI_text.innerHTML = story.window_meditate;
             button1.innerHTML = storyChoice.window.b1;
-            button2.innerHTML = storyChoice.window.b2;
+            button2.style.display = "none";
             button3.innerHTML = storyChoice.window.b3;
             UI_body.style.background = "blue";
             state = "Window";
@@ -507,8 +509,6 @@ function main() {
             button2.innerHTML = storyChoice.hack.b2;
             button3.innerHTML = storyChoice.hack.b3;
             UI_body.style.backgroundImage = "url('http://vignette3.wikia.nocookie.net/matrix/images/9/9c/Matrix_Code.gif/revision/latest/scale-to-width-down/800?cb=20110306191618')";
-
-            UI_body.style.backgroundSize = "100%";
             break;
         case "Shank" : UI_text.innerHTML = story.shank;
             button1.innerHTML = storyChoice.shank.b1;
@@ -606,8 +606,6 @@ function hackingSimulation(){
 function passwordCrack(e){
     e.target.parentNode.innerHTML = "You're in, but it turns out your boss just keeps pictures of himself on here.";
     UI_body.style.backgroundImage = "url('https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTQyMDA0NDgwMzUzNzcyNjA2/mark-zuckerberg_gettyimages-512304736jpg.jpg')";
-    UI_body.style.backgroundRepeat = "no-repeat";
-    UI_body.style.backgroundSize = "100%";
 }
 
 
